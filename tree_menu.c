@@ -121,8 +121,8 @@ int JumpMenu(TM_Direction Direction) {
 			break;
 		}
 		break;
-	case MD_LONG:
-		menuConfig->SaveCallback(actualIndex);
+	case MD_SPEC:
+		menuConfig->SpecCallback(actualIndex);
 		break;
 	case MD_NOTHING:
 		break;
@@ -137,7 +137,7 @@ int findNeighbor(int parentid, int id, TM_Direction side) { // Функция получения
 		do {
 			i--;
 			if (i == -1) { // переходим на конец массива
-				i = menuConfig->MenuSize-1;
+				i = menuConfig->MenuSize - 1;
 			}
 			if (menuConfig->Menus[i].parent_id == parentid) { // встреча = выход
 				break;

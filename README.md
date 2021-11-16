@@ -38,7 +38,7 @@ TM_Param params[TM_MENU_SIZE]={
   {0, 10}
 };
 ```
-3. Создать прототипы функций обратных вызовов (печать меню, изменение параметра, сохранение параметра, выполнение команды).
+3. Создать функции обратных вызовов (печать меню, изменение параметра, выполнение команды, спец.функция).
 ```c
 void PrintMenu(int index,TM_DeepLevel DeepLevel){
   // printing function prototype
@@ -48,16 +48,16 @@ void ChangeParam(int index){
   // change parameter function prototype
   switch(index){}
 }
-void SaveParam(int index){
-  // save parameter function prototype
-  switch(index){}
-}
 void ExecuteCmd(int index){
   // Сommand execution function prototype
   switch(index){}
 }
+void SpecFunction(int index){
+  // special function prototype
+  switch(index){}
+}
 ```
-4. Создать и заполнить структуку инициализации.
+4. Создать и заполнить структуру инициализации.
 ```c
 TM_Config MConfig;
 MConfig.MenuSize = TM_MENU_SIZE;
@@ -66,7 +66,7 @@ MConfig.Params = params;
 MConfig.PrintCallback = PrintMenu;
 MConfig.ChangeCallback = ChangeParam;
 MConfig.ExecuteCallback = ExecuteCmd;
-MConfig.SaveCallback = SaveParam;
+MConfig.SpecCallback = SaveParam;
 ```
 5. Вызвать функцию инициализации.
 ```c
@@ -91,7 +91,7 @@ switch (CheckButtons()) {
 		JumpMenu(MD_UP);
 	break;
 	case BTN_5:
-    JumpMenu(MD_LONG); 
+    JumpMenu(MD_SPEC); 
 	break;
 }
 ```
@@ -104,7 +104,7 @@ switch (CheckButtons()) {
 
 Каждый узел содержит поля:
 - `id` - идентификатор узла, индекс в выходном массиве;
-- `parent_id` - идентификатор родителя, индекс родителя в выходном массива;
+- `parent_id` - идентификатор родителя, индекс родителя в выходном массиве;
 - `Is parameter` - признак параметра, не может быть `true` для подменю;
 - `Name` - имя узла;
 - `Init value` - начальное значение;
@@ -119,4 +119,4 @@ switch (CheckButtons()) {
 Переходы по дереву:
 - Влево\вправо - смена узла, выбор разряда или изменение значения разряда;
 - Вперед\назад - смена узла, выполнение команды, переход к выбору разряда, или переход к изменению значения.
-- Доп. инструмент - дополнительная команда, например сохранения в EEPROM
+- Спец. функция - дополнительная команда, например сохранение в EEPROM.

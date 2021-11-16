@@ -19,7 +19,7 @@ typedef enum {
 typedef unsigned int TM_ParamType;
 
 typedef enum {
-	MD_UP, MD_DOWN, MD_LEFT, MD_RIGHT, MD_LONG, MD_NOTHING
+	MD_NOTHING, MD_UP, MD_DOWN, MD_LEFT, MD_RIGHT, MD_SPEC
 } TM_Direction;
 
 typedef enum {
@@ -32,7 +32,6 @@ typedef struct {
 } TM_Param;
 
 typedef struct {
-//	signed char id;
 	signed char parent_id;
 	bool is_param;
 	char name[15];
@@ -48,8 +47,8 @@ typedef struct {
 	TM_Param* Params;
 	void (*PrintCallback)(int index, TM_DeepLevel DeepLevel);
 	void (*ChangeCallback)(int index);
-	void (*SaveCallback)(int index);
 	void (*ExecuteCallback)(int index);
+	void (*SpecCallback)(int index);
 } TM_Config;
 
 void InitMenu(TM_Config* Configuration);
